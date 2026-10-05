@@ -1,5 +1,5 @@
 
-
+import User from "../models/userSchema.js";
 import Chat from "../models/chatSchema.js";
 import Message from "../models/msgSchema.js";
 
@@ -66,6 +66,17 @@ export const updateSummaryIfNeeded = async(chatId)=>{
     chat.usage.completionTokens += usage.candidatesToken;
     chat.usage.totalTokens += usage.totalTokenCount;
 
+   await chat.save();
+
+
+   // yeh hum pe depend karta hai ki hum yeh summary wala token user pe dena chhate hai ki nahi
+   const user = await User.findById(chat.userId);
+
+  if (user) {
+    user.usage.tokenUsed += usage.totalTokens;
+    user.usage.totalTokenUsed += usage.totalTokens;
+    await user.save();
+  }
     
 }
 

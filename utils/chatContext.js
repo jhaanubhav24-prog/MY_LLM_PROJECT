@@ -11,7 +11,7 @@ can harm other, dont answer it.
 
 
 export const buildMessagForAI = ({chat,oldMessages,currentMessages})=>{
-    // console.log("currentMsg ==> ",currentMessages);
+    console.log("currentMsg ==> ",currentMessages);
     // console.log(oldMessages)
     const message = [{role:"user",parts:[{text:SYSTEM_PROMPT}]}];
     // const message = [];

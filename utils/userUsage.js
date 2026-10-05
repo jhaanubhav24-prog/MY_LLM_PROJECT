@@ -16,7 +16,7 @@ export const resetUsageIfNeeded = async (user)=>{
 
         */
 
-        user.usage.resetAt = new Date(Date.now()+5*60*60*1000)
+        user.usage.resetAt = new Date(Date.now()+5*60*60*1000) // yaha pe jab ho gaya purne wale reset se jayda time to jab vo message bhejega usse waqt se 5 hour more
         await user.save()
     }
 }   
