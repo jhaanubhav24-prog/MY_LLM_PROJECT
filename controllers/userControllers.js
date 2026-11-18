@@ -212,19 +212,19 @@ export const deleteAccount = async (req,res) =>{
     
     try
     {
-        const id = req.user._id;
+        const id = req.user._id; // id nikalene
 
         // pahle pure chat nikalte hai
-        const chats = Chat.findAll({userId:id});
+        const chats = await Chat.findAll({userId:id});
         
 
         // second pura message niaklate hai 
-        const messages = Message.findAll({userId:id});
+        const messages = await Message.findAll({userId:id});
 
         // sabse pahle message delete karenge
-        Message.deleteMany({userId:id});
-        Chat.deleteMany({userId:id});
-        User.deleteOne({_id:id});
+       await Message.deleteMany({userId:id});
+       await Chat.deleteMany({userId:id});
+       await User.deleteOne({_id:id});
         // User.deleteOne == db.deleteOne ==> yaha User database hai
         
         res.clearCookie("token", {
